@@ -22,16 +22,19 @@
         }
         return choice;
     }
+
     function playerPlay() {
+        let choice;
         do {
-            console.log("Enter rock, paper, or scissors.");
-            let choice = readline().toLowerCase();
+            //console.log("Enter rock, paper, or scissors:");
+            choice = prompt("Enter rock, paper, or scissors:").toLowerCase();
         } while(choice != "rock" || 
         choice != "paper" || 
         choice != "scissors");
         return choice;
     }
-    function oneRound(playerChoice, computerChoice) {
+
+    function playRound(playerChoice, computerChoice) {
         console.log(`Player: ${playerChoice}
                      Computer: ${computerChoice}`);
         let result = "";
@@ -52,6 +55,27 @@
         }
         return result;
     }
+
+    function game() {
+        let playerScore = 0;
+        let computerScore = 0;
+        let repeat = "";
+        for (let i = 1; i <= 5; i++) {
+            console.log(`Score: ${playerScore}-${computerScore}`);
+            console.log(`${repeat} Round ${i} of 5`);
+            let result = playRound(playerPlay(), computerPlay());
+            console.log(result);
+            repeat = "";
+            if (result === "Computer wins!") computerScore++;
+            else if (result === "Player wins!") playerScore++;
+            else {
+                repeat = "Repeating";
+                i--;
+            }
+        }
+    }
+
+    game();
   </script>
 </body>
 </html>

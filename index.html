@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+  <title>Rock Paper Scissors</title>
   <meta charset="UTF-8"/>
 </head>
 <body>
   <script>
-    
+    function computerPlay() {
+        let play = Math.floor(Math.random()*3);
+        let choice;
+        switch (play) {
+            case 0:
+                choice = "rock";
+                break;
+            case 1: 
+                choice = "paper";
+                break;
+            case 2: 
+                choice = "scissors";
+                break;
+        }
+        return choice;
+    }
+    function playerPlay() {
+        do {
+            console.log("Enter rock, paper, or scissors.");
+            let choice = readline().toLowerCase();
+        } while(choice != "rock" || 
+        choice != "paper" || 
+        choice != "scissors");
+        return choice
+    }
+    function oneRound(playerChoice, computerChoice) {
+        
+    }
   </script>
 </body>
 </html>

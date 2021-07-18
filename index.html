@@ -29,10 +29,28 @@
         } while(choice != "rock" || 
         choice != "paper" || 
         choice != "scissors");
-        return choice
+        return choice;
     }
     function oneRound(playerChoice, computerChoice) {
-        
+        console.log(`Player: ${playerChoice}
+                     Computer: ${computerChoice}`);
+        let result = "";
+        if (playerChoice === "rock") {
+            if (computerChoice === "paper") result = `Computer wins!`;
+            else if (computerChoice === "scissors") result = `Player wins!`;
+            else result = `Draw!`;
+        }
+        else if (playerChoice === "paper") {
+            if (computerChoice === "scissors") result = `Computer wins!`;
+            else if (computerChoice === "rock") result = `Player wins!`;
+            else result = `Draw!`;
+        }
+        else if (playerChoice === "scissors") {
+            if (computerChoice === "rock") result = `Computer wins!`;
+            else if (computerChoice === "paper") result = `Player wins!`;
+            else result = `Draw!`;
+        }
+        return result;
     }
   </script>
 </body>

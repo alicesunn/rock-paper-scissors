@@ -1,3 +1,14 @@
+const score = document.querySelector("#score");
+const resultText = document.querySelector("#result");
+const choices = document.querySelector("#choice");
+let pScore = 0; 
+let cScore = 0;
+let gamePlay = true;
+
+const buttons = document.querySelectorAll(".rps");
+console.log(buttons);
+buttons.forEach(button => button.addEventListener("click", playerPlay));
+
 function computerPlay() {
     let play = Math.floor(Math.random()*3);
     let choice;
@@ -15,15 +26,9 @@ function computerPlay() {
     return choice;
 }
 
-function playerPlay() {
-    let choice;
-    do {
-        //console.log("Enter rock, paper, or scissors:");
-        choice = prompt("Enter rock, paper, or scissors:").toLowerCase();
-    } while(choice != "rock" && 
-    choice != "paper" && 
-    choice != "scissors");
-    return choice;
+function playerPlay(e) {
+    // console.log(this.id);
+    if (gamePlay === true) playRound(this.id, computerPlay());
 }
 
 function playRound(playerChoice, computerChoice) {
@@ -44,27 +49,23 @@ function playRound(playerChoice, computerChoice) {
         else if (computerChoice === "paper") result = `Player wins!`;
         else result = `Draw!`;
     }
-    return result;
+    showScore(result, playerChoice, computerChoice);
 }
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    let repeat = "";
-    let result;
-    for (let i = 1; i <= 5; i++) {
-        console.log(`Score: ${playerScore}-${computerScore}`);
-        console.log(`${repeat} Round ${i} of 5`);
-        result = playRound(playerPlay(), computerPlay());
-        alert(result);
-        repeat = "";
-        if (result === "Computer wins!") computerScore++;
-        else if (result === "Player wins!") playerScore++;
-        else {
-            repeat = "Repeating";
-            i--;
-        }
+function showScore(r, p, c) {
+    if (r === "Player wins!") pScore++;
+    else if (r === "Computer wins!") cScore++;
+    choices.textContent = `player: ${p} / computer: ${c}`;
+    resultText.textContent = r;
+    score.textContent = `${pScore} - ${cScore}`;
+    if (pScore === 5 || cScore === 5) {
+        gameOver();
     }
 }
 
-game();
+function gameOver() {
+    const game = document.createElement("h1");
+    game.textContent = "Game over! Refresh to play again.";
+    document.querySelector("div").append(game);
+    gamePlay = false;
+}
